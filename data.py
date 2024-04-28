@@ -1,3 +1,6 @@
+"""
+Various utility functions for data processing and analysis
+"""
 import torch
 from torch.utils.data import DataLoader
 from torchvision import transforms
@@ -36,6 +39,9 @@ def get_imagenet_dataloaders(data_folder='/home/dl_class/data/ILSVRC/Data/CLS-LO
     return train_dataloader, test_dataloader
 
 def get_preds(classifier, dataloader, transform=None):
+    """
+    Returns a tuple containing an array of true labels and an array of predicted labels
+    """
     Y = []
     Y_pred = []
     for x, y in dataloader:
