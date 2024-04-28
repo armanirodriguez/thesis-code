@@ -1,3 +1,8 @@
+"""
+A PyTorch lightning wrapper for fine tuning ResNet50
+
+Author: Armani Rodriguez
+"""
 import torch
 from torch import nn
 import torch.nn.functional as F

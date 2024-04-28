@@ -1,3 +1,8 @@
+"""
+The original PyTorch implementation of HQA
+
+Source: https://github.com/speechmatics/hqa
+"""
 import torch
 from torch import nn
 import torch.nn.functional as F

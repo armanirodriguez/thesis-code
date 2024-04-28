@@ -1,4 +1,6 @@
 """
+Rectified Adam Optimizer
+
 Source: https://github.com/speechmatics/hqa
 
 Note: Some deprecated functions used in the original code were updated

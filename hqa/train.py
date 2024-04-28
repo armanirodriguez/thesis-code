@@ -1,4 +1,6 @@
 """
+Original training script for HQA on MNIST
+
 Source: https://github.com/speechmatics/hqa
 """
 import os

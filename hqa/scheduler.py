@@ -1,4 +1,6 @@
 """
+Flat+ Cosine Anneal Scheduler
+
 Source: https://github.com/speechmatics/hqa
 """
 import math

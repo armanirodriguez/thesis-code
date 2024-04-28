@@ -1,5 +1,7 @@
 """
-Armani Rodriguez
+A PyTorch lightning wrapper for HQA
+
+Author: Armani Rodriguez
 """
 
 import lightning.pytorch as pl
@@ -166,6 +168,9 @@ class HQA2D_Lightning(pl.LightningModule):
         return hqa  
     
     def on_codeword_reset(self, moved_index, new_codeword):
+        """
+        Hook to perform operations whenever a codeword is reset (ex. T-SNE Visualization)
+        """
         pass
 
     def encode(self, x):

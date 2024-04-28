@@ -1,3 +1,9 @@
+"""
+A PyTorch lightning implementation of LeNet5 described here:
+http://vision.stanford.edu/cs598_spring07/papers/Lecun98.pdf
+
+Author: Armani Rodriguez
+"""
 import lightning.pytorch as pl
 
 import torch
@@ -16,6 +22,11 @@ class LeNet5(pl.LightningModule):
         fc1 = nn.Linear(120, out_features=84)
         fc2 = nn.Linear(84, out_features=num_classes)
         
+        # The initialization and use of the GELU activation function was taken from
+        # my colleague's implementation of LeNet for the paper which we co-authored:
+        # "Analysis of Lossy Generative Data Compression for Robust Remote Deep Inference"
+        #
+        # https://github.com/MathewTWilliams/hqa_research/blob/main/lenet.py
         init.xavier_normal_(conv1.weight)
         init.xavier_normal_(conv2.weight)
         init.xavier_normal_(conv3.weight)
