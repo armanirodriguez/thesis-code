@@ -5,8 +5,6 @@ from torch import nn, optim
 from torch.nn import init
 import torch.nn.functional as F
 
-from tqdm import tqdm
-
 from data import get_mnist_dataloaders
 
 class LeNet5(pl.LightningModule):
@@ -81,21 +79,6 @@ def train_lenet_mnist(**trainer_args):
     trainer = pl.Trainer(**trainer_args)
     trainer.fit(model, dl_train, dl_test)
     return model
-
-def get_preds(model, dataloader, transform=None):
-    Y = []
-    Y_pred = []
-    for x, y in tqdm(dataloader):
-        if transform is not None:
-            x = transform(x, y)
-        x = x.to(model.device)
-        y_pred = model(x)
-        label_pred = torch.argmax(y_pred, dim=1)
-        Y.extend(y)
-        Y_pred.extend(label_pred)
-    Y = list(map(lambda y : y.item(), Y))
-    Y_pred = list(map(lambda y : y.item(), Y_pred))
-    return Y, Y_pred
     
 if __name__ == '__main__':
     model = train_lenet_mnist(max_epochs=20)

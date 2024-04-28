@@ -109,6 +109,7 @@ class ImageNet100(Dataset):
     ]
 
     def __init__(self, root, split, transform=None, remap_labels=True):
+        self.root = root
         self.samples = []
         self.targets = []
         self.transform = transform
@@ -153,7 +154,17 @@ class ImageNet100(Dataset):
             x = self.transform(x)
         return x, self.targets[idx]
 
+    def get_human_readable_class(self, class_folder_name):
+        with open(os.path.join(self.root, "imagenet_class_index.json"), "rb") as f:
+            json_file = json.load(f)
+            for class_id, v in json_file.items():
+                if v[0] == class_folder_name:
+                    return v[1]
+        return None
+        
+
 if __name__ == '__main__':
+    from tqdm import tqdm
     from torch.utils.data import DataLoader
     from torchvision import transforms as T
     DATA_FOLDER = '/home/dl_class/data/ILSVRC/Data/CLS-LOC/'
@@ -162,5 +173,6 @@ if __name__ == '__main__':
         T.ToTensor()
     ]))
     dataloader = DataLoader(dataset, 64, True)
-    print(len(dataloader))
+    
+    
     

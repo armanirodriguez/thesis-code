@@ -93,7 +93,7 @@ class HQA2D_Lightning(pl.LightningModule):
         return loss
 
     def configure_optimizers(self):
-        optimizer = torch.optim.Adam(self.parameters(), lr=self.lr)
+        optimizer = torch.optim.RAdam(self.parameters(), lr=self.lr)
         lr_scheduler = FlatCA(
             optimizer,
             steps=self.trainer.max_epochs * self.trainer.num_training_batches,
@@ -223,7 +223,7 @@ def train_hqa_imagenet100(**trainer_args):
          {
             'enc_hidden_dim':enc_hiden_size,
             'dec_hidden_dim':dec_hidden_size,
-            'codebook_slots':256,
+            'codebook_slots':512,
         } for enc_hiden_size, dec_hidden_size in zip(enc_hidden_sizes, dec_hidden_sizes)
     ]
     
@@ -239,4 +239,4 @@ def train_hqa_imagenet100(**trainer_args):
 
 if __name__ == "__main__":
     model = train_hqa_imagenet100(max_epochs=50, num_sanity_val_steps=0)
-    torch.save(model, "checkpoints/hqa_imagenet.pt")
+    torch.save(model, "checkpoints/hqa_imagenet_512codebook.pt")
